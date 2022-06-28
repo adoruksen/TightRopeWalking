@@ -27,7 +27,7 @@ MonoBehaviour:
     - rid: 2472261345763655681
       type: {class: RopePart, ns: LevelSystem, asm: Assembly-CSharp}
       data:
-        _ropeArea: {fileID: -1634215242362512958, guid: 82c4e37d39eaddf429117d1e635b4152,
+        _ropeArea: {fileID: 8412204720492720385, guid: 82c4e37d39eaddf429117d1e635b4152,
           type: 3}
     - rid: 2472261345763655682
       type: {class: FinishPart, ns: LevelSystem, asm: Assembly-CSharp}

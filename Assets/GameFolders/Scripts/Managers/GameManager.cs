@@ -9,12 +9,18 @@ namespace Managers
         public event Action OnGameStart;
         public event Action OnGameEnd;
 
+        public static GameManager instance;
+
         [SerializeField] private GameMode _defaultGameMode;
 
         private GameMode _currentGameMode;
 
 
         public bool IsPlaying { get; private set; }
+        private void Awake()
+        {
+            instance = this;
+        }
 
         private void Start()
         {
