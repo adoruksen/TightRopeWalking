@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using Cinemachine;
 using DG.Tweening;
@@ -21,10 +20,17 @@ public class CinemachineController : MonoBehaviour
         _transposer = _virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
         _composer = _virtualCamera.GetCinemachineComponent<CinemachineComposer>();
     }
+
     public void SetTarget(CameraFollowTarget target)
     {
         followTarget = target;
         ChangeTarget(followTarget.transform);
+    }
+
+    public void SetConfig(CameraConfig config)
+    {
+        ChangeCamPosInTime(config.Position,.3f,false);
+        ChangeCamRotInTime(config.Rotation, .3f, false);
     }
 
     public void ChangeCamPosInTime(Vector3 target, float duration, bool isAddition = true)
@@ -33,9 +39,16 @@ public class CinemachineController : MonoBehaviour
         DOTween.To(() => _transposer.m_FollowOffset, x => _transposer.m_FollowOffset = x, pos, duration);
     }
 
+    public void ChangeCamRotInTime(Vector3 target, float duration, bool isAddition = true)
+    {
+        var rot = isAddition ? _composer.m_TrackedObjectOffset + target : target;
+        DOTween.To(() => _composer.m_TrackedObjectOffset, x => _composer.m_TrackedObjectOffset = x, rot, duration);
+    }
+
     private void ChangeTarget(Transform targetTransform)
     {
         _virtualCamera.m_LookAt = targetTransform;
         _virtualCamera.m_Follow = targetTransform;
     }
+
 }
