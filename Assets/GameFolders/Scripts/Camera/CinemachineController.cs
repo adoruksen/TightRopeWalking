@@ -29,8 +29,8 @@ public class CinemachineController : MonoBehaviour
 
     public void SetConfig(CameraConfig config)
     {
-        ChangeCamPosInTime(config.Position,.3f,false);
-        ChangeCamRotInTime(config.Rotation, .3f, false);
+        ChangeCamPosInTime(config.Position,.5f,false);
+        ChangeCamRotInTime(config.Rotation, .5f, false);
     }
 
     public void ChangeCamPosInTime(Vector3 target, float duration, bool isAddition = true)

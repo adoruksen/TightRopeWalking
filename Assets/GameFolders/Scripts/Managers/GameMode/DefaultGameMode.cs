@@ -10,6 +10,7 @@ namespace Managers.GameModes
     public class DefaultGameMode : GameMode
     {
         public LevelConfig[] Levels;
+        [SerializeField] private CameraConfig _startConfig;
 
         public override void InitializeGameMode()
         {
@@ -18,6 +19,10 @@ namespace Managers.GameModes
             CharacterManager.instance.SpawnCharacter();
             var startArea = LevelManager.instance.level.gameAreas[0];
             startArea.OnCharacterEntered(CharacterManager.instance.player);
+            var target = new GameObject("cameraTarget").AddComponent<CameraFollowTarget>();
+            target.transform.SetParent(GameManager.instance.transform);
+            CinemachineController.instance.SetTarget(target);
+            CinemachineController.instance.SetConfig(_startConfig);
             IntroUiController.instance.ShowInstant();
         }
 

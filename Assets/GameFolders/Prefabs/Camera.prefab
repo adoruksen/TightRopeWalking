@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 8309505474508491509}
   - component: {fileID: 8309505474508491508}
   - component: {fileID: 8309505474508491498}
+  - component: {fileID: 372639825}
   m_Layer: 0
   m_Name: CMVirtualCamera
   m_TagString: Untagged
@@ -180,6 +181,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 0}
+--- !u!114 &372639825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8309505474508491511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b2ab2452bb70d498757e2e37343cb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startConfig: {fileID: 11400000, guid: c7c6e66e8ea18cb4899056777e2b9d49, type: 2}
+  _gameplayConfig: {fileID: 11400000, guid: 95acf3afa9d429d468c134dfa55a9adb, type: 2}
+  _finishConfig: {fileID: 11400000, guid: c7149ef0622546f48ae9047d0785228a, type: 2}
 --- !u!1 &8309505474567100285
 GameObject:
   m_ObjectHideFlags: 0
