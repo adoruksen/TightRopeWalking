@@ -1,17 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterMovement : MonoBehaviour
+namespace Character
 {
-    private void Update()
+    public class CharacterMovement : MonoBehaviour
     {
-        MoveForward();
-    }
-    private void MoveForward()
-    {
-        transform.position += Vector3.forward * Time.deltaTime * 8f;
-    }
+        private Rigidbody _rigidbody;
 
-    
+        public float MoveSpeed;
+        public bool IsActive;
+
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
+        public void Move()
+        {
+            if (!IsActive) return;
+            var movement = Vector3.forward * MoveSpeed;
+            _rigidbody.velocity = movement;
+        }
+    }
 }
+

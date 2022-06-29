@@ -1,5 +1,7 @@
 using System;
 using LevelSystem;
+using game.UI;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Managers.GameModes
@@ -13,33 +15,42 @@ namespace Managers.GameModes
         {
             var config = Levels[0]; //tek level oldugu icin
             LevelManager.instance.SpawnLevel(config.parts);
-        }
-        public override void CompleteGameMode()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void DeinitializeGameMode()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void FailGameMode()
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        public override void SkipGameMode()
-        {
-            throw new NotImplementedException();
+            CharacterManager.instance.SpawnCharacter();
+            var startArea = LevelManager.instance.level.gameAreas[0];
+            startArea.OnCharacterEntered(CharacterManager.instance.player);
+            IntroUiController.instance.ShowInstant();
         }
 
         public override void StartGameMode(Action levelStart)
         {
-            throw new NotImplementedException();
+            IntroUiController.instance.Hide();
+            StartGame();
+
+            void StartGame()
+            {
+                CinemachineController.instance.SetTarget(CharacterManager.instance.player.GetComponent<CameraFollowTarget>());
+                levelStart.Invoke();
+            }
+
         }
+        public override void CompleteGameMode()
+        {
+            DOVirtual.DelayedCall(1f, WinUiController.instance.Show, false);
+        }
+        public override void FailGameMode()
+        {
+            DOVirtual.DelayedCall(2f, FailUiController.instance.Show, false);
+        }
+
+        public override void DeinitializeGameMode()
+        {
+        }
+        
+        public override void SkipGameMode()
+        {
+        }
+
+        
     }
 }
 

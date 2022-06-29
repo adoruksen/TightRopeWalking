@@ -21,7 +21,7 @@ namespace Managers
         [Button]
         public void SpawnLevel(LevelPart[] parts)
         {
-            level = new GameObject("level").AddComponent<LevelController>();
+            level = new GameObject("Level").AddComponent<LevelController>();
             var gameAreas = new List<GameAreaManager>();
             var prevArea = parts[0].SetupPart(level.transform);
             gameAreas.Add(prevArea);

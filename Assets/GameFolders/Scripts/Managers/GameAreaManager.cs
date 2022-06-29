@@ -1,4 +1,5 @@
 using UnityEngine;
+using CharacterController = Character.CharacterController;
 
 namespace LevelSystem
 {
@@ -15,6 +16,9 @@ namespace LevelSystem
         {
             transform.position = position;
         }
+
+        public virtual void OnCharacterEntered(CharacterController controller) { }
+        public virtual void OnCharacterExited(CharacterController controller) { }
     }
 }
 

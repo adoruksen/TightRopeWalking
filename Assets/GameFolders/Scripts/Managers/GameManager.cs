@@ -4,10 +4,10 @@ using System;
 
 namespace Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : BaseGameManager
     {
-        public event Action OnGameStart;
-        public event Action OnGameEnd;
+        public static event GameEvents OnGameInitialized;
+        public static event GameEvents OnGameEnd;
 
         public static GameManager instance;
 
@@ -15,8 +15,8 @@ namespace Managers
 
         private GameMode _currentGameMode;
 
-
         public bool IsPlaying { get; private set; }
+
         private void Awake()
         {
             instance = this;
@@ -27,12 +27,28 @@ namespace Managers
             InitializeGameMode(_defaultGameMode);
         }
 
-        private void InitializeGameMode(GameMode gameMode)
+        public void InitializeGameMode(GameMode gameMode)
         {
             if (_currentGameMode != null) _currentGameMode.DeinitializeGameMode();
             _currentGameMode = gameMode;
             _currentGameMode.InitializeGameMode();
-            OnGameStart?.Invoke();
+            LevelInitialize();
+        }
+
+        public void StartGameMode()
+        {
+            _currentGameMode.StartGameMode(LevelStart);
+            IsPlaying = true;
+        }
+
+        protected void LevelInitialize()
+        {
+            OnGameInitialized?.Invoke();
+        }
+
+        protected void LevelEnd()
+        {
+            OnGameEnd?.Invoke();
         }
     }
 }
