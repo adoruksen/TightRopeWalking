@@ -15,6 +15,8 @@ namespace Managers
 
         private GameMode _currentGameMode;
 
+        public Transform defaultParent;
+
         public bool IsPlaying { get; private set; }
 
         private void Awake()

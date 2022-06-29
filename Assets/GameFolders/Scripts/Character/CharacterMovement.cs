@@ -19,6 +19,14 @@ namespace Character
             var movement = Vector3.forward * MoveSpeed;
             _rigidbody.velocity = movement;
         }
+
+        public void Look()
+        {
+            if (!IsActive) return;
+
+            var rotation = Quaternion.Lerp(_rigidbody.rotation, Quaternion.LookRotation(Vector3.back), .2f);
+            _rigidbody.MoveRotation(rotation);
+        }
     }
 }
 

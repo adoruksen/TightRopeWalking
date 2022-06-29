@@ -1,11 +1,12 @@
 using InteractionSystem;
 using Character.StateMachine;
+using StackSystem;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
 namespace Character
 {
-    public class CharacterController : MonoBehaviour
+    public class CharacterController : MonoBehaviour,IInteractor
     {
         [SerializeReference, BoxGroup("Idle", false), HorizontalGroup("Idle/Group")] public State IdleState;
         [SerializeReference, BoxGroup("Game", false), HorizontalGroup("Game/Group")] public GameState GameState;
@@ -17,12 +18,15 @@ namespace Character
         public Interactor Interactor { get; private set; }
         public CharacterMovement Movement { get; private set; }
         public CharacterAnimationController Animation { get; private set; }
+        
+        public StackController StackController { get; private set; }
 
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();
             Movement = GetComponent<CharacterMovement>();
             Interactor = GetComponentInChildren<Interactor>();
+            StackController = GetComponent<StackController>();
             
             SetState(IdleState);
         }
