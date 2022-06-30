@@ -731,7 +731,7 @@ MonoBehaviour:
     m_Root: {fileID: 1170356355481129754}
     m_Mid: {fileID: 1639124196046919959}
     m_Tip: {fileID: 3376272163902206070}
-    m_Target: {fileID: 0}
+    m_Target: {fileID: 1729249554653265981}
     m_Hint: {fileID: 1729249554653265981}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
@@ -788,7 +788,7 @@ MonoBehaviour:
     m_Root: {fileID: 107860163999297135}
     m_Mid: {fileID: 8306244497134218619}
     m_Tip: {fileID: 2750836109990428978}
-    m_Target: {fileID: 0}
+    m_Target: {fileID: 1729249553244614897}
     m_Hint: {fileID: 1729249553244614897}
     m_TargetPositionWeight: 1
     m_TargetRotationWeight: 1
@@ -1062,7 +1062,7 @@ Animator:
   m_GameObject: {fileID: 1963268854716687422}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0b897771b343d4cb78eef8c634adaa0d, type: 3}
-  m_Controller: {fileID: 9100000, guid: f2e53d70b49ea44efa2428665e6fadb2, type: 2}
+  m_Controller: {fileID: 9100000, guid: bebaca0ea6e6f924b9bbf33f43d0c26b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

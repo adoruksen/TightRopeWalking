@@ -837,6 +837,101 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.388
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.54074484
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5665483
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.44979292
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.42930695
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 92.66998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 76.894
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.369
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.192
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.239
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.524237
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.4739368
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5295714
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.46916276
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -83.627
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 95.233
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -5.201
+      objectReference: {fileID: 0}
     - target: {fileID: 1963268854716687422, guid: 2869dfc269eadb145a6a0539e012c663,
         type: 3}
       propertyPath: m_Name

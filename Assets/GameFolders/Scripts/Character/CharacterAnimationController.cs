@@ -4,17 +4,21 @@ namespace Character
 {
     public class CharacterAnimationController : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private Animator _animator;
 
+
+        private static readonly int LeftSide = Animator.StringToHash("LeftSide");
+        private static readonly int RightSide = Animator.StringToHash("RightSide");
+        private static readonly int Move = Animator.StringToHash("Move");
+
+        private void Awake()
+        {
+            _animator = GetComponentInChildren<Animator>();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        public void TriggerMove() => _animator.SetTrigger(Move);
+        public void TriggerLeftSide() => _animator.SetTrigger(LeftSide);
+        public void TriggerRightSide() => _animator.SetTrigger(RightSide);
     }
 }
 

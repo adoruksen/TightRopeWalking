@@ -25,6 +25,7 @@ namespace Character
         {
             Rigidbody = GetComponent<Rigidbody>();
             Movement = GetComponent<CharacterMovement>();
+            Animation = GetComponent<CharacterAnimationController>();
             Interactor = GetComponentInChildren<Interactor>();
             StackController = GetComponent<StackController>();
             
