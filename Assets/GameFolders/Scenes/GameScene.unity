@@ -343,12 +343,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6341026616735952996, guid: 63b7fc39847da9144b2f91c049fd39c9,
+        type: 3}
+      propertyPath: _pizzaPool
+      value: 
+      objectReference: {fileID: 4734522816397611959, guid: 0b5184c618ebb4946a8fd5f9cbe5c1cd,
+        type: 3}
     - target: {fileID: 6341026616735952997, guid: 63b7fc39847da9144b2f91c049fd39c9,
         type: 3}
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6956388005887034926, guid: 63b7fc39847da9144b2f91c049fd39c9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 63b7fc39847da9144b2f91c049fd39c9, type: 3}
 --- !u!1001 &6519837661585756437
 PrefabInstance:

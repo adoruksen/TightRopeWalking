@@ -10,6 +10,7 @@ namespace Managers
     {
         public static LevelManager instance;
         public static event Action<LevelController> OnLevelSpawned;
+        [SerializeField] private GameObject _pizzaPool;
 
         [ReadOnly] public LevelController level;
 
@@ -35,6 +36,11 @@ namespace Managers
 
             level.gameAreas = gameAreas.ToArray();
             OnLevelSpawned?.Invoke(level);
+        }
+
+        public void SpawnPizzaPool()
+        {
+            Instantiate(_pizzaPool);
         }
     }
 }

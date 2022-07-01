@@ -23,6 +23,7 @@ namespace Managers.GameModes
             target.transform.SetParent(GameManager.instance.transform);
             CinemachineController.instance.SetTarget(target);
             CinemachineController.instance.SetConfig(_startConfig);
+            LevelManager.instance.SpawnPizzaPool();
             IntroUiController.instance.ShowInstant();
         }
 

@@ -60,12 +60,10 @@ namespace PizzaSystem
             DOVirtual.DelayedCall(2f, () => { ReturnToPool(); });
         }
 
-
         private void ReturnToPool()
         {
             ObjectPool.instance.PutObject(PoolType, PoolId, gameObject);
         }
-
     }
 }
 

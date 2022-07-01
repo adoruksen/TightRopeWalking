@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PoolSystem
 {
@@ -43,9 +44,10 @@ namespace PoolSystem
         {
             instance = this;
             SpawnObjects();
-        }
 
-        private void SpawnObjects()
+
+        }
+        public void SpawnObjects()
         {
             for (int i = 0; i < pools.Length; i++)
             {
@@ -78,7 +80,7 @@ namespace PoolSystem
             var newPoolId = 0;
             if (poolId == 0)
             {
-                newPoolId = UnityEngine.Random.Range(0, pools.Where(x => x.PoolTypeName == poolType).FirstOrDefault().TypedPool.Length - 1);
+                newPoolId = Random.Range(0, pools.Where(x => x.PoolTypeName == poolType).FirstOrDefault().TypedPool.Length - 1);
             }
             else
             {

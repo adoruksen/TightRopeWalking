@@ -11,9 +11,9 @@ namespace PizzaSystem
         [SerializeField] private TMP_Text objectCountText;
         [SerializeField] private List<Transform> objects;
 
-        public int ObjectCount => objectCount;
+        public int ObjectCount { get => objectCount; private set { objectCount = value; } }
         [SerializeField] private int objectCount;
-        public bool IsUsed => isUsed;
+        public bool IsUsed { get => isUsed; private set { isUsed = value; } }
         [SerializeField] private bool isUsed;
 
         private int _moveToPlayerIndex;
@@ -34,7 +34,7 @@ namespace PizzaSystem
                     temp.localEulerAngles = Vector3.zero;
                     temp.GetComponent<Pizza>().SetInteractable(false);
                     temp.SetParent(transform);
-                    temp.localPosition = new Vector3(0, stackCount * i, 0);
+                    temp.localPosition = new Vector3(0, .5f+(.1f * i), 0);
                     objects.Add(temp);
                 }
                 objects.Reverse();
@@ -43,8 +43,8 @@ namespace PizzaSystem
             {
                 SetText(stackCount);
             }
-            isUsed = false;
-            objectCount = stackCount;
+            IsUsed = false;
+            ObjectCount = stackCount;
         }
 
         public void ObjectsHolderToPlayer(int count, Transform target)
@@ -54,8 +54,8 @@ namespace PizzaSystem
                 _moveToPlayerIndex = objects.Count - 1;
                 MoveToPlayerTarget(target);
 
-                isUsed = true;
-                objectCount -= count;
+                IsUsed = true;
+                ObjectCount -= count;
             }
             else
             {
@@ -66,7 +66,7 @@ namespace PizzaSystem
 
                     if (ObjectCount == 0 && !IsUsed)
                     {
-                        isUsed = true;
+                        IsUsed = true;
                         CreateNewHolderAndReturnPool();
                     }
                 });
@@ -80,7 +80,7 @@ namespace PizzaSystem
                 if (_moveToPlayerIndex > -1)
                 {
                     var temp = objects[_moveToPlayerIndex];
-                    SetObject(temp, target);// scale 0.5 yapma parent'a gönderdikten sonra pozisyonu 0 a getir.
+                    SetObject(temp, target);
 
                     objects.RemoveAt(_moveToPlayerIndex);
 
