@@ -1,4 +1,5 @@
 using System;
+using PizzaSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using CharacterController = Character.CharacterController;
@@ -12,28 +13,35 @@ namespace StackSystem
 {
     public class StackController : MonoBehaviour
     {
-        public event Action<Pizza,Transform> OnStackAdded;
-        public event Action OnStackUsed;
+        public static StackController instance;
+        //public event Action<Pizza,Transform> OnStackAdded;
+        //public event Action OnStackUsed;
 
-        public static StackSide stackSideTransform = StackSide.Right;
+        public static StackSide stackSideTransform;
+        public int LeftStackCount => _leftStackParent.childCount;
         [SerializeField] private Transform _leftStackParent;
+        public int RightStackCount => _rightStackParent.childCount;
         [SerializeField] private Transform _rightStackParent;
 
         public Transform StackParent => StackSideSelector();
 
         [ShowInInspector,ReadOnly,PropertyOrder(-1)] public int Stack { get; private set; }
 
-        public void AddStack(Pizza obj,Transform parent)
+        private void Awake()
         {
-            Stack++;
-            OnStackAdded?.Invoke(obj,parent);
+            instance = this;
         }
+        //public void AddStack(Pizza obj,Transform parent)
+        //{
+        //    Stack++;
+        //    OnStackAdded?.Invoke(obj,parent);
+        //}
 
-        public void UseStack()
-        {
-            Stack--;
-            OnStackUsed?.Invoke();
-        }
+        //public void UseStack()
+        //{
+        //    Stack--;
+        //    OnStackUsed?.Invoke();
+        //}
 
         public Transform StackSideSelector()
         {
@@ -53,8 +61,8 @@ namespace StackSystem
             var interactor = GetComponentInParent<CharacterController>();
             for (var i = 0; i < _amount; i++)
             {
-                var obj = PizzaManager.instance.SpawnObject();
-                obj.OnInteractBegin(interactor);
+                //var obj = PizzaManager.instance.SpawnObject();
+                //obj.OnInteractBegin(interactor);
             }
         }
 #endif
