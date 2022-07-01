@@ -11,7 +11,7 @@ using CharacterController = Character.CharacterController;
 
 namespace PizzaSystem
 {
-    public class Pizza : MonoBehaviour/*, IBeginInteract*/, IPooled
+    public class Pizza : MonoBehaviour, /*IBeginInteract,*/ IPooled
     {
         public event Action OnCollected;
 
@@ -27,19 +27,20 @@ namespace PizzaSystem
         //public void OnInteractBegin(IInteractor interactor)
         //{
         //    var controller = (CharacterController)interactor;
-        //    Collect(controller);
+        //    Finish(controller);
         //}
 
-        //private void Collect(CharacterController controller)
+        //private void Finish(CharacterController controller)
         //{
-        //    OnCollected?.Invoke();
-        //    controller.StackController.AddStack(this, controller.StackController.StackParent);
-        //    SetInteractable(false);
+        //    Debug.Log("Finish");
+        //    //OnCollected?.Invoke();
+        //    //controller.StackController.AddStack(this, controller.StackController.StackParent);
+        //    //SetInteractable(false);
         //}
 
         public void SetLost()
         {
-            transform.SetParent(GameManager.instance.defaultParent);
+            transform.SetParent(null);
             SetInteractable(true);
             FlingPizza();
         }

@@ -3,53 +3,54 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using PizzaSystem;
+using TMPro;
 
 namespace StackSystem
 {
     public class StackVisualController : MonoBehaviour
     {
-        //private StackController _stackController;
+        private StackController _stackController;
 
-        //[ShowInInspector] private readonly Stack<Pizza> _stackedObjects = new Stack<Pizza>();
+        [SerializeField] private TMP_Text _leftHolderText;
+        [SerializeField] private TMP_Text _rightHolderText;
 
-        //[SerializeField] private float _distance;
-
-        //private void Awake()
-        //{
-        //    _stackController = GetComponent<StackController>();
-        //}
+        private void Awake()
+        {
+            _stackController = GetComponent<StackController>();
+        }
 
 
-        //private void OnEnable()
-        //{
-        //    _stackController.OnStackAdded += UpdateVisualAdded;
-        //    _stackController.OnStackUsed += UpdateVisualUsed;
-        //}
+        private void OnEnable()
+        {
+            _stackController.OnStackUsed += UpdateVisualUsed;
+            _stackController.OnStackAdded += UpdateStackPosition;
+        }
 
-        //private void OnDisable()
-        //{
-        //    _stackController.OnStackAdded -= UpdateVisualAdded;
-        //    _stackController.OnStackUsed -= UpdateVisualUsed;
-        //}
+        private void OnDisable()
+        {
+            _stackController.OnStackUsed -= UpdateVisualUsed;
+            _stackController.OnStackAdded -= UpdateStackPosition;
 
-        //private void UpdateVisualAdded(Pizza obj,Transform parent)
-        //{
-        //    _stackedObjects.Push(obj);
-        //    var objTransform = obj.transform;
-        //    objTransform.SetParent(parent);
-        //    objTransform.localPosition = Vector3.up * (_stackController.Stack * _distance);
-        //    objTransform.localRotation = Quaternion.identity;
-        //}
+        }
 
-        //private void UpdateVisualUsed()
-        //{
-        //    var obj = _stackedObjects.Pop();
-        //    obj.transform.DOScale(Vector3.zero, .2f).OnComplete(() =>
-        //    {
-        //        //PizzaManager.instance.RemoveObject(obj);
-        //        obj.transform.localScale = Vector3.one;
-        //    });
-        //}
+        private void UpdateVisualUsed(int leftHolderCount,int rightHolderCount)
+        {
+            _leftHolderText.text = $"{leftHolderCount}";
+            _rightHolderText.text = $"{rightHolderCount}";
+            StackController.stackSide = StackSide.NoWhere;
+        }
+
+        private void UpdateStackPosition(Transform leftParent, Transform rightParent)
+        {
+            for (int i = 0; i < leftParent.childCount; i++)
+            {
+                leftParent.GetChild(i).DOLocalMoveY(.05f * i, .2f);
+            }
+            for (int i = 0; i < rightParent.childCount; i++)
+            {
+                rightParent.GetChild(i).DOLocalMoveY(.05f * i, .2f);
+            }
+        }
     }
 }
 

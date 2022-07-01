@@ -15,8 +15,6 @@ namespace PizzaSystem
         [SerializeField] private PizzaBase _currentObject;
         public PizzaBase CurrentObject { get => _currentObject; private set => _currentObject = value; }
 
-        public static event Action OnMoveFinish;
-
         private void Awake()
         {
             instance = this;
@@ -39,10 +37,6 @@ namespace PizzaSystem
                 randomHolderCount = Mathf.Clamp(Random.Range(1, Mathf.Min(StackController.instance.LeftStackCount, StackController.instance.RightStackCount) + 8), 1, 22);
             }
             CurrentObject = SpawnManager.instance.SpawnObjectAndSetPosition(randomHolderCount);
-        }
-        public void MoveFinisher()
-        {
-            OnMoveFinish?.Invoke();
         }
     }
 }

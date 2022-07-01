@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 6341026616735952996}
   - component: {fileID: 6341026616735952993}
   - component: {fileID: 6341026616735952992}
-  - component: {fileID: 6956388005887034926}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -127,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5f84f9f600bb342addececdb43509f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pizzaPool: {fileID: 4734522816397611959, guid: 0b5184c618ebb4946a8fd5f9cbe5c1cd,
+    type: 3}
   level: {fileID: 0}
 --- !u!114 &6341026616735952993
 MonoBehaviour:
@@ -155,17 +156,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feff865d75451814498e28cfa7cdfe3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6956388005887034926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6341026616735952997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef5a99a6cd13194bbd45897c8af3be0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 4844741758025811677, guid: 9d049533cd5c1444c8141739af46db0e, type: 3}
-  poolParent: {fileID: 100568513090019451}

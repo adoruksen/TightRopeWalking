@@ -21,7 +21,6 @@ namespace PizzaSystem
 
         public string PoolType { get; set; }
         public int PoolId { get; set; }
-
         public void SetObjects(string objectPoolType, int objectPoolId, int stackCount)
         {
             objects = new List<Transform>();
@@ -88,7 +87,6 @@ namespace PizzaSystem
 
                     SetText(objects.Count);
                     MoveToPlayerTarget(target);
-                    PizzaHolderManager.instance.MoveFinisher();
                 }
                 else
                 {
