@@ -47,7 +47,7 @@ public class CinemachineController : MonoBehaviour
 
     private void ChangeTarget(Transform targetTransform)
     {
-        _virtualCamera.m_LookAt = targetTransform;
+        //_virtualCamera.m_LookAt = targetTransform;
         _virtualCamera.m_Follow = targetTransform;
     }
 

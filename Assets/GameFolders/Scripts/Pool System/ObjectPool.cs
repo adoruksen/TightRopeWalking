@@ -47,7 +47,7 @@ namespace PoolSystem
 
 
         }
-        public void SpawnObjects()
+        private void SpawnObjects()
         {
             for (int i = 0; i < pools.Length; i++)
             {

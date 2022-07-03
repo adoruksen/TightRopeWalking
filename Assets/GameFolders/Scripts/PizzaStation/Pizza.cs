@@ -11,7 +11,7 @@ using CharacterController = Character.CharacterController;
 
 namespace PizzaSystem
 {
-    public class Pizza : MonoBehaviour, /*IBeginInteract,*/ IPooled
+    public class Pizza : MonoBehaviour, IPooled
     {
         public event Action OnCollected;
 
@@ -23,24 +23,8 @@ namespace PizzaSystem
         public string PoolType { get; set; }
         public int PoolId { get; set; }
 
-
-        //public void OnInteractBegin(IInteractor interactor)
-        //{
-        //    var controller = (CharacterController)interactor;
-        //    Finish(controller);
-        //}
-
-        //private void Finish(CharacterController controller)
-        //{
-        //    Debug.Log("Finish");
-        //    //OnCollected?.Invoke();
-        //    //controller.StackController.AddStack(this, controller.StackController.StackParent);
-        //    //SetInteractable(false);
-        //}
-
         public void SetLost()
         {
-            transform.SetParent(null);
             SetInteractable(true);
             FlingPizza();
         }
@@ -49,6 +33,7 @@ namespace PizzaSystem
         {
             _collider.enabled = interactable;
             _rigidbody.isKinematic = !interactable;
+            _rigidbody.useGravity = interactable;
             IsInteractable = interactable;
             //PizzaManager.instance.SetObjectAvailable(this, interactable);
         }

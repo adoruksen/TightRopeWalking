@@ -25,7 +25,11 @@ namespace PizzaSystem
         {
             objects = new List<Transform>();
 
-            if (stackCount > 0)
+            if (stackCount <= 0)
+            {
+                SetText(stackCount);
+            }
+            else
             {
                 for (int i = 0; i < stackCount; i++)
                 {
@@ -33,13 +37,10 @@ namespace PizzaSystem
                     temp.localEulerAngles = Vector3.zero;
                     temp.GetComponent<Pizza>().SetInteractable(false);
                     temp.SetParent(transform);
-                    temp.localPosition = new Vector3(0, .5f+(.1f * i), 0);
+                    temp.localPosition = new Vector3(0, .5f + (.1f * i), 0);
                     objects.Add(temp);
                 }
                 objects.Reverse();
-            }
-            else
-            {
                 SetText(stackCount);
             }
             IsUsed = false;
@@ -58,7 +59,7 @@ namespace PizzaSystem
             }
             else
             {
-                DOVirtual.Int(ObjectCount, ObjectCount - count, .2f, x =>
+                DOVirtual.Int(ObjectCount, ObjectCount - count, .05f, x =>
                 {
                     objectCount = x;
                     SetText(x);
@@ -74,9 +75,16 @@ namespace PizzaSystem
 
         private void MoveToPlayerTarget(Transform target)
         {
-            DOVirtual.DelayedCall(.2f, () =>
+            DOVirtual.DelayedCall(.05f, () =>
             {
-                if (_moveToPlayerIndex > -1)
+                if (_moveToPlayerIndex <= -1)
+                {
+                    if (ObjectCount == 0)
+                    {
+                        CreateNewHolderAndReturnPool();
+                    }
+                }
+                else
                 {
                     var temp = objects[_moveToPlayerIndex];
                     SetObject(temp, target);
@@ -87,13 +95,6 @@ namespace PizzaSystem
 
                     SetText(objects.Count);
                     MoveToPlayerTarget(target);
-                }
-                else
-                {
-                    if (ObjectCount == 0)
-                    {
-                        CreateNewHolderAndReturnPool();
-                    }
                 }
             });
         }
@@ -119,15 +120,15 @@ namespace PizzaSystem
 
         private void SetText(int amount)
         {
-            if (amount > 0)
-            {
-                objectCountText.text = $"+{amount}";
-                objectCountText.DOColor(Color.green, .1f);
-            }
-            else
+            if (amount <= 0)
             {
                 objectCountText.text = $"{amount}";
                 objectCountText.DOColor(Color.red, .1f);
+            }
+            else
+            {
+                objectCountText.text = $"+{amount}";
+                objectCountText.DOColor(Color.green, .1f);
             }
         }
     }

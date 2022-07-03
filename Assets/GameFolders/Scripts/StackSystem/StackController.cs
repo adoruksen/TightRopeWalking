@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PoolSystem;
 using PizzaSystem;
 using Sirenix.OdinInspector;
@@ -20,10 +21,14 @@ namespace StackSystem
         public event Action<int,int> OnStackUsed;
 
         public static StackSide stackSide;
-        public int LeftStackCount => _leftStackParent.childCount;
-        [SerializeField] private Transform _leftStackParent;
-        public int RightStackCount => _rightStackParent.childCount;
+        public int LeftStackCount => _leftStickObjectsCount;
+        private int _leftStickObjectsCount;
+        public int RightStackCount => _rightStickObjectsCount;
+        private int _rightStickObjectsCount;
+
         [SerializeField] private Transform _rightStackParent;
+        [SerializeField] private Transform _leftStackParent;
+
 
         public Transform StackParent => StackSideSelector();
 
@@ -38,17 +43,6 @@ namespace StackSystem
         {
             GettingPizzaBoxes();
         }
-        //public void AddStack(Pizza obj,Transform parent)
-        //{
-        //    Stack++;
-        //    OnStackAdded?.Invoke(obj,parent);
-        //}
-
-        //public void UseStack()
-        //{
-        //    Stack--;
-        //    OnStackUsed?.Invoke();
-        //}
         public void GettingPizzaBoxes()
         {
             if (PizzaHolderManager.instance.CurrentObject == null) return;
@@ -61,26 +55,54 @@ namespace StackSystem
             var amount = ObjectAmount();
             if(amount != 0)
             {
-                if (stackSide == StackSide.Left)
-                    PizzaHolderManager.instance.CurrentObject.ObjectsHolderToPlayer(amount, _leftStackParent);
-                else if(stackSide == StackSide.Right)
-                    PizzaHolderManager.instance.CurrentObject.ObjectsHolderToPlayer(amount, _rightStackParent);
-                if (PizzaHolderManager.instance.CurrentObject.ObjectCount > 0)
+                if (stackSide == StackSide.NoWhere) return;
+                if (StackParent == _leftStackParent) _leftStickObjectsCount += amount;
+                if (StackParent == _rightStackParent) _rightStickObjectsCount += amount;
+                PizzaHolderManager.instance.CurrentObject.ObjectsHolderToPlayer(amount, StackParent);
+
+                if (PizzaHolderManager.instance.CurrentObject.ObjectCount < 0)
                     ObjectMoveToGround(amount);
             }
+            for (int i = 0; i < amount; i++)
+            {
+                OnStackAdded?.Invoke(_leftStackParent, _rightStackParent);
+            }
             OnStackUsed?.Invoke(LeftStackCount,RightStackCount);
-            OnStackAdded?.Invoke(_leftStackParent, _rightStackParent);
         }
 
         private void ObjectMoveToGround(int count)
         {
+            Transform child = null;
+            var removedList = new List<Transform>();
             for (int i = 0; i < Mathf.Abs(count); i++)
             {
                 if (stackSide == StackSide.Left)
-                    _leftStackParent.GetChild(i).GetComponent<Pizza>().SetLost();
+                {
+                    child = _leftStackParent.GetChild(i);
+                    child.GetComponent<Pizza>().SetLost();
+                }
                 else if (stackSide == StackSide.Right)
-                    _rightStackParent.GetChild(i).GetComponent<Pizza>().SetLost();
+                {
+                    child = _rightStackParent.GetChild(i);
+                    child.GetComponent<Pizza>().SetLost();
+                }
+                removedList.Add(child);
             }
+            if (stackSide == StackSide.Left)
+            {
+                for (int i = 0; i < removedList.Count; i++)
+                {
+                    removedList[i].SetParent(null);
+                }
+            }
+            else if (stackSide == StackSide.Right)
+            {
+                for (int i = 0; i < removedList.Count; i++)
+                {
+                    removedList[i].SetParent(null);
+                }
+            }
+            removedList.Clear();
         }
         private int ObjectAmount()
         {
@@ -91,15 +113,15 @@ namespace StackSystem
             {
                 if (stackSide == StackSide.Left)
                 {
-                    if (Mathf.Abs(PizzaHolderManager.instance.CurrentObject.ObjectCount) >= LeftStackCount)
-                        givenObj = -LeftStackCount;
+                    if (Mathf.Abs(PizzaHolderManager.instance.CurrentObject.ObjectCount) >= _leftStickObjectsCount)
+                        givenObj = -_leftStickObjectsCount;
                     else
                         givenObj = PizzaHolderManager.instance.CurrentObject.ObjectCount;
                 }
                 else if(stackSide == StackSide.Right)
                 {
-                    if (Mathf.Abs(PizzaHolderManager.instance.CurrentObject.ObjectCount) >= RightStackCount)
-                        givenObj = -RightStackCount;
+                    if (Mathf.Abs(PizzaHolderManager.instance.CurrentObject.ObjectCount) >= _rightStickObjectsCount)
+                        givenObj = -_rightStickObjectsCount;
                     else
                         givenObj = PizzaHolderManager.instance.CurrentObject.ObjectCount;
                 }

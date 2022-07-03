@@ -11,6 +11,8 @@ namespace Managers
 
         [SerializeField] private List<string> spawnableObjectTypes;
 
+        private int _distance = 25;
+
         private void Awake()
         {
             instance = this;
@@ -18,10 +20,10 @@ namespace Managers
         
         public PizzaBase SpawnObjectAndSetPosition(int stackCount)
         {
-            if (CharacterManager.instance.player.transform.position.z + 25 < LevelManager.instance.level.gameAreas[^1].transform.position.z)
+            if (CharacterManager.instance.player.transform.position.z + _distance < LevelManager.instance.level.gameAreas[^1].transform.position.z)
             {
                 var newObjectHolder = ObjectPool.instance.GetObject("pizzaBoxHolder", 0).transform;
-                newObjectHolder.position = CharacterManager.instance.player.transform.position + new Vector3(0, 0, 25);
+                newObjectHolder.position = CharacterManager.instance.player.transform.position + new Vector3(0, 0, _distance);
                 newObjectHolder.SetParent(null);
 
                 var tempBase = newObjectHolder.GetComponent<PizzaBase>();

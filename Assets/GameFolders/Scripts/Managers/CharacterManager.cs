@@ -1,5 +1,3 @@
-using System;
-using Character.StateMachine;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using CharacterController = Character.CharacterController;

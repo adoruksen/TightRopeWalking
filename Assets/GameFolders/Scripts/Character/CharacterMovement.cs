@@ -8,7 +8,7 @@ namespace Character
         private Rigidbody _rigidbody;
         private Vector3 _mouseStartPos;
         private Vector3 _mouseEndPos;
-        private float _desiredSwipeValue = 100f;
+        private readonly float _desiredSwipeValue = 100f;
 
         public float MoveSpeed;
         public bool IsActive;
@@ -29,9 +29,8 @@ namespace Character
         private void Update()
         {
             GetInput();
-            Debug.Log(StackController.stackSide);
         }
-        public void GetInput()
+        private void GetInput()
         {
             if (MouseDown)
             {
