@@ -172,6 +172,19 @@ namespace StackSystem
                 item.isKinematic = false;
             }
         }
+
+        public void WhenItsFail()
+        {
+            stickObject.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
+            for (int i = 0; i < _leftStackParent.childCount; i++)
+            {
+                _leftStackParent.GetChild(i).GetComponent<Pizza>().SetLost();
+            }
+            for (int i = 0; i < _rightStackParent.childCount; i++)
+            {
+                _rightStackParent.GetChild(i).GetComponent<Pizza>().SetLost();
+            }
+        }
         public Transform StackSideSelector()
         {
             if (stackSide == StackSide.Left)

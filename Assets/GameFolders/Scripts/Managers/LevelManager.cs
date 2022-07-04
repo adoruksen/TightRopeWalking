@@ -40,7 +40,8 @@ namespace Managers
 
         public void SpawnPizzaPool()
         {
-            Instantiate(_pizzaPool);
+            var pizzaPool = Instantiate(_pizzaPool);
+            pizzaPool.transform.SetParent(FindObjectOfType<LevelController>().transform);
         }
 
         public void DestroyLevel()

@@ -21,6 +21,7 @@ namespace Character
         public void TriggerLeftSide() => _animator.SetTrigger(LeftSide);
         public void TriggerRightSide() => _animator.SetTrigger(RightSide);
         public void TriggerIdle() => _animator.SetTrigger(Idle);
+        public void TriggerRagdoll() => _animator.enabled = false;
     }
 }
 

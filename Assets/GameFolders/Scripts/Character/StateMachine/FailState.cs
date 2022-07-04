@@ -8,13 +8,11 @@ namespace Character.StateMachine
         protected override void OnStateEnter(CharacterController controller)
         {
             controller.DOKill();
-            controller.Animation.TriggerIdle();
+            controller.Animation.TriggerRagdoll() ;
             controller.StackController.FailRagdollEffect();
-            controller.StackController.stickObject.SetParent(null);
+            controller.StackController.WhenItsFail();
             controller.Rigidbody.isKinematic = false;
             controller.Rigidbody.useGravity = true;
-            
-
             controller.Rigidbody.constraints = UnityEngine.RigidbodyConstraints.None;
             GameManager.instance.FailGameMode();
         }

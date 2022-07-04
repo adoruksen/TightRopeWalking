@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using PoolSystem;
 using PizzaSystem;
+using LevelSystem;
 using UnityEngine;
 
 namespace Managers
@@ -24,7 +25,7 @@ namespace Managers
             {
                 var newObjectHolder = ObjectPool.instance.GetObject("pizzaBoxHolder", 0).transform;
                 newObjectHolder.position = CharacterManager.instance.player.transform.position + new Vector3(0, 0, _distance);
-                newObjectHolder.SetParent(null);
+                newObjectHolder.SetParent(FindObjectOfType<LevelController>().transform);
 
                 var tempBase = newObjectHolder.GetComponent<PizzaBase>();
                 PrepareObjectHolder(tempBase, stackCount);
