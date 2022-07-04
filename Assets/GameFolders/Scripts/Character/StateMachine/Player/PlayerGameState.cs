@@ -1,4 +1,5 @@
 using System;
+using StackSystem;
 
 namespace Character.StateMachine
 {
@@ -8,6 +9,8 @@ namespace Character.StateMachine
         public override void OnStateFixedUpdate(CharacterController controller)
         {
             controller.Movement.Move();
+            controller.StackController.StacksBalanceSystem();
+
         }
     }
 }

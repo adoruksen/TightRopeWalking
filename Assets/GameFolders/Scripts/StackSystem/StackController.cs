@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using PoolSystem;
 using PizzaSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using CharacterController = Character.CharacterController;
 
 public enum StackSide
 {
@@ -17,8 +15,9 @@ namespace StackSystem
     public class StackController : MonoBehaviour
     {
         public static StackController instance;
-        public event Action<Transform, Transform> OnStackAdded;
-        public event Action<int,int> OnStackUsed;
+        private StackVisualController _stackVisual;
+        //public event Action<Transform, Transform> OnStackAdded;
+        //public event Action<int,int> OnStackUsed;
 
         public static StackSide stackSide;
         public int LeftStackCount => _leftStickObjectsCount;
@@ -28,6 +27,8 @@ namespace StackSystem
 
         [SerializeField] private Transform _rightStackParent;
         [SerializeField] private Transform _leftStackParent;
+        public Transform stickObject;
+        public Quaternion stickObjectRotation;
 
 
         public Transform StackParent => StackSideSelector();
@@ -37,6 +38,8 @@ namespace StackSystem
         private void Awake()
         {
             instance = this;
+            _stackVisual = GetComponent<StackVisualController>();
+            stickObjectRotation = stickObject.localRotation;
         }
 
         private void Update()
@@ -63,11 +66,11 @@ namespace StackSystem
                 if (PizzaHolderManager.instance.CurrentObject.ObjectCount < 0)
                     ObjectMoveToGround(amount);
             }
-            for (int i = 0; i < amount; i++)
-            {
-                OnStackAdded?.Invoke(_leftStackParent, _rightStackParent);
-            }
-            OnStackUsed?.Invoke(LeftStackCount,RightStackCount);
+            _stackVisual.UpdateStackPosition(_leftStackParent, _rightStackParent);
+            _stackVisual.UpdateVisualUsed(LeftStackCount, RightStackCount);
+            _stackVisual.AnimTrigger(LeftStackCount,RightStackCount);
+            //OnStackUsed?.Invoke(LeftStackCount,RightStackCount);
+            //OnStackAdded?.Invoke(_leftStackParent, _rightStackParent);
         }
 
         private void ObjectMoveToGround(int count)
@@ -128,13 +131,28 @@ namespace StackSystem
             }
             return givenObj;
         }
+
+        public void StacksBalanceSystem()
+        {
+            var isLeft = LeftStackCount > RightStackCount;
+            var i = isLeft ? 1 : -1;
+            var dif = Mathf.Abs(LeftStackCount - RightStackCount);
+            var lerpRotZ = Mathf.Lerp(0, 35 * i, dif / 20f);
+            stickObject.localRotation = Quaternion.AngleAxis(lerpRotZ, Vector3.forward) * stickObjectRotation;
+
+            var sRot = stickObject.localRotation.eulerAngles;
+            var relZ = sRot.x-90;
+            var rot = transform.rotation.eulerAngles;
+            rot.z = relZ / 2f;
+            if (sRot.z > 0) rot.z = -relZ / 2f;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rot), 5 * Time.fixedDeltaTime);
+        }
         public Transform StackSideSelector()
         {
             if (stackSide == StackSide.Left)
             {
                 return _leftStackParent;
             }
-
             return _rightStackParent;
         }
 

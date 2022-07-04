@@ -8,6 +8,8 @@ namespace Character
         private Rigidbody _rigidbody;
         private Vector3 _mouseStartPos;
         private Vector3 _mouseEndPos;
+        private float _balanceValue = 0f;
+
         private readonly float _desiredSwipeValue = 100f;
 
         public float MoveSpeed;
@@ -15,9 +17,12 @@ namespace Character
         private bool MouseDown => Input.GetMouseButtonDown(0);
         private bool MouseUp => Input.GetMouseButtonUp(0);
 
+        private CharacterController _controller;
+
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            _controller = GetComponent<CharacterController>();
         }
         public void Move()
         {

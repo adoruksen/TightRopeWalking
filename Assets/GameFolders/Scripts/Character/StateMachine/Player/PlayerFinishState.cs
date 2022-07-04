@@ -11,15 +11,15 @@ namespace Character.StateMachine
 
         protected override void OnStateEnter(CharacterController controller)
         {
-            _moved = false;
+            //_moved = false;
             //CinemachineController.instance.SetTarget(this) ;
         }
 
         public override void OnStateFixedUpdate(CharacterController controller)
         {
-            if (_moved) return;
-            controller.Movement.Look();
-            PodiumSequence(controller);
+            //if (_moved) return;
+            //controller.Movement.Look();
+            //PodiumSequence(controller);
         }
 
         private void PodiumSequence(CharacterController controller)
