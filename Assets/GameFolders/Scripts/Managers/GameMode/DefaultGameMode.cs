@@ -50,6 +50,8 @@ namespace Managers.GameModes
 
         public override void DeinitializeGameMode()
         {
+            LevelManager.instance.DestroyLevel();
+            CharacterManager.instance.DestroyCharacter();
         }
         
         public override void SkipGameMode()

@@ -42,6 +42,11 @@ namespace Managers
         {
             Instantiate(_pizzaPool);
         }
+
+        public void DestroyLevel()
+        {
+            if (level != null) Destroy(level.gameObject);
+        }
     }
 }
 

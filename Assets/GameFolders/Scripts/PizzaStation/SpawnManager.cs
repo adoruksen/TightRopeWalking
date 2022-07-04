@@ -38,7 +38,7 @@ namespace Managers
 
         private void PrepareObjectHolder(PizzaBase pizzaBase, int stackCount)
         {
-            pizzaBase.SetObjects(spawnableObjectTypes[Random.Range(0, spawnableObjectTypes.Count)], 0, stackCount);
+            pizzaBase.SetPooledObject(spawnableObjectTypes[Random.Range(0, spawnableObjectTypes.Count)], 0, stackCount);
         }
     }
 }

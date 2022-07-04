@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using PizzaSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using CharacterController = Character.CharacterController;
 
 public enum StackSide
 {
@@ -16,6 +16,7 @@ namespace StackSystem
     {
         public static StackController instance;
         private StackVisualController _stackVisual;
+        private CharacterController _controller;
         //public event Action<Transform, Transform> OnStackAdded;
         //public event Action<int,int> OnStackUsed;
 
@@ -29,6 +30,9 @@ namespace StackSystem
         [SerializeField] private Transform _leftStackParent;
         public Transform stickObject;
         public Quaternion stickObjectRotation;
+        private readonly float _maxRot = 25f;
+        private readonly float _maxTime = 3;
+        private float _timer;
 
 
         public Transform StackParent => StackSideSelector();
@@ -39,6 +43,7 @@ namespace StackSystem
         {
             instance = this;
             _stackVisual = GetComponent<StackVisualController>();
+            _controller = GetComponent<CharacterController>();
             stickObjectRotation = stickObject.localRotation;
         }
 
@@ -55,16 +60,16 @@ namespace StackSystem
 
         private void GetPizza()
         {
-            var amount = ObjectAmount();
+            var amount = GetObjectAmount();
             if(amount != 0)
             {
                 if (stackSide == StackSide.NoWhere) return;
                 if (StackParent == _leftStackParent) _leftStickObjectsCount += amount;
                 if (StackParent == _rightStackParent) _rightStickObjectsCount += amount;
-                PizzaHolderManager.instance.CurrentObject.ObjectsHolderToPlayer(amount, StackParent);
+                PizzaHolderManager.instance.CurrentObject.PizzaHolderToPlayerMove(amount, StackParent);
 
                 if (PizzaHolderManager.instance.CurrentObject.ObjectCount < 0)
-                    ObjectMoveToGround(amount);
+                    PizzaLost(amount);
             }
             _stackVisual.UpdateStackPosition(_leftStackParent, _rightStackParent);
             _stackVisual.UpdateVisualUsed(LeftStackCount, RightStackCount);
@@ -73,7 +78,7 @@ namespace StackSystem
             //OnStackAdded?.Invoke(_leftStackParent, _rightStackParent);
         }
 
-        private void ObjectMoveToGround(int count)
+        private void PizzaLost(int count)
         {
             Transform child = null;
             var removedList = new List<Transform>();
@@ -107,7 +112,7 @@ namespace StackSystem
             }
             removedList.Clear();
         }
-        private int ObjectAmount()
+        private int GetObjectAmount()
         {
             var givenObj = 0;
             if (PizzaHolderManager.instance.CurrentObject.ObjectCount > 0)
@@ -137,15 +142,21 @@ namespace StackSystem
             var isLeft = LeftStackCount > RightStackCount;
             var i = isLeft ? 1 : -1;
             var dif = Mathf.Abs(LeftStackCount - RightStackCount);
-            var lerpRotZ = Mathf.Lerp(0, 35 * i, dif / 20f);
-            stickObject.localRotation = Quaternion.AngleAxis(lerpRotZ, Vector3.forward) * stickObjectRotation;
+            var lerpRotX = Mathf.Lerp(0, 35 * i, dif / 30f);
+            stickObject.localRotation = Quaternion.AngleAxis(lerpRotX, Vector3.forward) * stickObjectRotation;
 
             var sRot = stickObject.localRotation.eulerAngles;
-            var relZ = sRot.x-90;
+            var relX = sRot.x - 90;
             var rot = transform.rotation.eulerAngles;
-            rot.z = relZ / 2f;
-            if (sRot.z > 0) rot.z = -relZ / 2f;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rot), 5 * Time.fixedDeltaTime);
+            rot.z = relX / 2f;
+            if (sRot.z > 0) rot.z = -relX / 2f;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rot), 5 * Time.deltaTime);
+            if (Mathf.Abs(lerpRotX) > _maxRot)
+            {
+                _timer += Time.fixedDeltaTime;
+                if (_timer > _maxTime) _controller.SetState(_controller.FailState);
+            }
+            else _timer = 0;
         }
         public Transform StackSideSelector()
         {

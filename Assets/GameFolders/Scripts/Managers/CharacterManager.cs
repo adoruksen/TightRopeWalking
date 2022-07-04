@@ -36,6 +36,11 @@ namespace Managers
             if (player.GameState != null) 
                 player.SetState(player.GameState);
         }
+
+        public void DestroyCharacter()
+        {
+            Destroy(player.gameObject);
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 using InteractionSystem;
-using UnityEngine;
+using CharacterController = Character.CharacterController;
 
 namespace PizzaSystem
 {
@@ -9,7 +9,8 @@ namespace PizzaSystem
 
         public void OnInteractBegin(IInteractor interactor)
         {
-            Debug.Log("Finish");
+            var controller = (CharacterController)interactor;
+            controller.SetState(controller.FailState);
         }
     }
 }

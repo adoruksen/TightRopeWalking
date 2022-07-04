@@ -52,6 +52,19 @@ namespace Managers
         {
             OnGameEnd?.Invoke();
         }
+
+        public void CompleteGameMode()
+        {
+            LevelEnd();
+            IsPlaying = false;
+            _currentGameMode.CompleteGameMode();
+        }
+        public void FailGameMode()
+        {
+            IsPlaying = false;
+            _currentGameMode.FailGameMode();
+            LevelEnd();
+        }
     }
 }
 

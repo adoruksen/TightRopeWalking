@@ -10,6 +10,7 @@ namespace Character
         private static readonly int LeftSide = Animator.StringToHash("LeftSide");
         private static readonly int RightSide = Animator.StringToHash("RightSide");
         private static readonly int Move = Animator.StringToHash("Move");
+        private static readonly int Idle = Animator.StringToHash("Idle");
 
         private void Awake()
         {
@@ -19,6 +20,7 @@ namespace Character
         public void TriggerMove() => _animator.SetTrigger(Move);
         public void TriggerLeftSide() => _animator.SetTrigger(LeftSide);
         public void TriggerRightSide() => _animator.SetTrigger(RightSide);
+        public void TriggerIdle() => _animator.SetTrigger(Idle);
     }
 }
 

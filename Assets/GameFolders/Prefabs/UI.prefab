@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _retryButton: {fileID: 2054184416}
-  _gameMode: {fileID: 0}
+  _gameMode: {fileID: 11400000, guid: 153c283d0ff8cb443808619e1bd61f8f, type: 2}
 --- !u!1 &297372740
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextButton: {fileID: 752791662}
-  _gameMode: {fileID: 0}
+  _gameMode: {fileID: 11400000, guid: 153c283d0ff8cb443808619e1bd61f8f, type: 2}
 --- !u!1 &752791660
 GameObject:
   m_ObjectHideFlags: 0

@@ -754,7 +754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -888,6 +888,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1729249553868938474, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_Data.m_Target
+      value: 
+      objectReference: {fileID: 5309793423132904737}
+    - target: {fileID: 1729249553939858491, guid: 2869dfc269eadb145a6a0539e012c663,
+        type: 3}
+      propertyPath: m_Data.m_Target
+      value: 
+      objectReference: {fileID: 5309793422531591661}
     - target: {fileID: 1963268854716687422, guid: 2869dfc269eadb145a6a0539e012c663,
         type: 3}
       propertyPath: m_Name
@@ -895,6 +905,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2869dfc269eadb145a6a0539e012c663, type: 3}
+--- !u!4 &5309793422531591661 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1729249553244614897, guid: 2869dfc269eadb145a6a0539e012c663,
+    type: 3}
+  m_PrefabInstance: {fileID: 6795839146831547676}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5309793423132904737 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1729249554653265981, guid: 2869dfc269eadb145a6a0539e012c663,
+    type: 3}
+  m_PrefabInstance: {fileID: 6795839146831547676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5636982265845068696 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1185922467815341700, guid: 2869dfc269eadb145a6a0539e012c663,

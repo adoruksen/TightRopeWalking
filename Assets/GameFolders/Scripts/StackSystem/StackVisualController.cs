@@ -52,7 +52,6 @@ namespace StackSystem
                 {
                     rightParent.GetChild(i).DOLocalMoveY(.05f * i, .1f);
                 }
-
             });
             
         }

@@ -21,7 +21,7 @@ namespace PizzaSystem
 
         public string PoolType { get; set; }
         public int PoolId { get; set; }
-        public void SetObjects(string objectPoolType, int objectPoolId, int stackCount)
+        public void SetPooledObject(string objectPoolType, int objectPoolId, int stackCount)
         {
             objects = new List<Transform>();
 
@@ -47,12 +47,12 @@ namespace PizzaSystem
             ObjectCount = stackCount;
         }
 
-        public void ObjectsHolderToPlayer(int count, Transform target)
+        public void PizzaHolderToPlayerMove(int count, Transform target)
         {
             if (ObjectCount > 0)
             {
                 _moveToPlayerIndex = objects.Count - 1;
-                MoveToPlayerTarget(target);
+                MoveToStickTarget(target);
 
                 IsUsed = true;
                 ObjectCount -= count;
@@ -73,7 +73,7 @@ namespace PizzaSystem
             }
         }
 
-        private void MoveToPlayerTarget(Transform target)
+        private void MoveToStickTarget(Transform target)
         {
             DOVirtual.DelayedCall(.05f, () =>
             {
@@ -94,7 +94,7 @@ namespace PizzaSystem
                     _moveToPlayerIndex--;
 
                     SetText(objects.Count);
-                    MoveToPlayerTarget(target);
+                    MoveToStickTarget(target);
                 }
             });
         }

@@ -16,7 +16,7 @@ public class FinishTrigger : MonoBehaviour ,IBeginInteract
     public void OnInteractBegin(IInteractor interactor)
     {
         var character = (CharacterController)interactor;
-        character.SetState(character.FinishState);
+        character.SetState(character.WinState);
         character.GameState.OnStateExited += EnterFinishArea;
     }
 
