@@ -21,6 +21,7 @@ namespace Character
         
         public StackController StackController { get; private set; }
 
+
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody>();

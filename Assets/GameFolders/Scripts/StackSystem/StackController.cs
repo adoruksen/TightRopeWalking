@@ -34,6 +34,9 @@ namespace StackSystem
         private readonly float _maxTime = 3;
         private float _timer;
 
+        public List<Rigidbody> ragdollRigidbodies;
+
+
 
         public Transform StackParent => StackSideSelector();
 
@@ -154,9 +157,20 @@ namespace StackSystem
             if (Mathf.Abs(lerpRotX) > _maxRot)
             {
                 _timer += Time.fixedDeltaTime;
-                if (_timer > _maxTime) _controller.SetState(_controller.FailState);
+                if (_timer > _maxTime)
+                {
+                    _controller.SetState(_controller.FailState);
+                } 
             }
             else _timer = 0;
+        }
+
+        public void FailRagdollEffect()
+        {
+            foreach (var item in ragdollRigidbodies)
+            {
+                item.isKinematic = false;
+            }
         }
         public Transform StackSideSelector()
         {

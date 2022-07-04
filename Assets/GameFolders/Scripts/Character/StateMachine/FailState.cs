@@ -9,7 +9,13 @@ namespace Character.StateMachine
         {
             controller.DOKill();
             controller.Animation.TriggerIdle();
-            controller.Rigidbody.isKinematic = true;
+            controller.StackController.FailRagdollEffect();
+            controller.StackController.stickObject.SetParent(null);
+            controller.Rigidbody.isKinematic = false;
+            controller.Rigidbody.useGravity = true;
+            
+
+            controller.Rigidbody.constraints = UnityEngine.RigidbodyConstraints.None;
             GameManager.instance.FailGameMode();
         }
     }
